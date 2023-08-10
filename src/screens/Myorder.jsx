@@ -40,7 +40,7 @@ const Myorder = () => {
         className="py-4 mt-3"
         style={{ minHeight: "100vh", backgroundColor: "#F1F3F6" }}
       >
-        {mereOrder !== "" ? (
+        {mereOrder !== {} ? (
           <Container
             style={{ color: "#172337" }}
             fluid
