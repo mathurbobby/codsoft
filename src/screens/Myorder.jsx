@@ -10,7 +10,7 @@ const Myorder = () => {
 
   const getOrder = async () => {
     try {
-      const response = await fetch("http://localhost:5000/api/myorders", {
+      const response = await fetch("https://clickcart-9q8w.onrender.com/api/myorders", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
