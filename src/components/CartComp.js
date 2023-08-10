@@ -18,7 +18,7 @@ const ModalComp = (props) => {
 
   const handleCheckout = async () => {
     localStorage.setItem('cart', JSON.stringify(data));
-    const response = await fetch("http://localhost:5000/api/payment/create-checkout-session", {
+    const response = await fetch("https://clickcart-9q8w.onrender.com/api/payment/create-checkout-session", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
