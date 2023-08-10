@@ -17,7 +17,7 @@ const Success = () => {
      // dispatch({type:'CART', cart: JSON.stringify(data) })
       const userEmail = localStorage.getItem('userEmail');
       // console.log(localStorage.getItem("cart"))
-      const response = await fetch("http://localhost:5000/api/orderdata", {
+      const response = await fetch("https://clickcart-9q8w.onrender.com/api/orderdata", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
