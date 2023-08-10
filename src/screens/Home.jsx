@@ -27,7 +27,7 @@ const Home = () => {
 
   const loadData = async () => {
     try {
-      const response = await axios.post("http://localhost:5000/api/fooddata", {});
+      const response = await axios.post("https://clickcart-9q8w.onrender.com/api/fooddata", {});
     setProducts(response.data[1]);
     setProdCategory(response.data[0]);
     } catch (error) {
