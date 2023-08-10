@@ -1,24 +1,34 @@
-import logo from './logo.svg';
-import './App.css';
+import "./App.css";
+import "bootstrap/dist/css/bootstrap.min.css";
+import "bootstrap/dist/js/bootstrap.min.js";
+import Home from "./screens/Home";
+import { Routes, Route } from "react-router-dom";
+import Login from "./screens/Login";
+import SignUp from "./screens/SignUp";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import CartProvider from "./components/ContextReducer";
+import Myorder  from "./screens/Myorder";
+import Success from "./screens/Success";
+import Failure from './screens/Failure';
+import Error from './screens/Error'
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <CartProvider>
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/createuser" element={<SignUp />} />
+          <Route path="/myorders" element={<Myorder />} />
+          <Route path="/payment-success" element={<Success />} />
+          <Route path="/payment-failure" element={<Failure />} />
+          <Route path="*" element={<Error />} />
+        </Routes>
+        <ToastContainer autoClose={2000} />
+      </CartProvider>
+    </>
   );
 }
 
