@@ -19,11 +19,11 @@ function App() {
       <CartProvider>
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route path="/login" element={<Login />} />
-          <Route path="/createuser" element={<SignUp />} />
-          <Route path="/myorders" element={<Myorder />} />
-          <Route path="/payment-success" element={<Success />} />
-          <Route path="/payment-failure" element={<Failure />} />
+          <Route path="login" element={<Login />} />
+          <Route path="createuser" element={<SignUp />} />
+          <Route path="myorders" element={<Myorder />} />
+          <Route path="payment/success" element={<Success />} />
+          <Route path="payment/failure" element={<Failure />} />
           <Route path="*" element={<Error />} />
         </Routes>
         <ToastContainer autoClose={2000} />
