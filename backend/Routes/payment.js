@@ -22,8 +22,8 @@ router.post('/create-checkout-session', async (req, res) => {
     const session = await stripe.checkout.sessions.create({
     line_items,
     mode: 'payment',
-    success_url: `${process.env.CLIENT_URL}/payment/success`,
-    cancel_url: `${process.env.CLIENT_URL}/payment/failure`,
+    success_url: `${process.env.CLIENT_URL}payment/success`,
+    cancel_url: `${process.env.CLIENT_URL}payment/failure`,
   });
 
   res.status(200).json({url : session.url, success:true});
