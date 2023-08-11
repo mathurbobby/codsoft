@@ -11,11 +11,13 @@ import CartProvider from "./components/ContextReducer";
 import Myorder  from "./screens/Myorder";
 import Success from "./screens/Success";
 import Failure from './screens/Failure';
-import Error from './screens/Error'
+import Error from './screens/Error';
+import { SkeletonTheme } from 'react-loading-skeleton';
 
 function App() {
   return (
     <>
+    <SkeletonTheme baseColor="#e0e4eb" highlightColor="#cfe0fc">
       <CartProvider>
         <Routes>
           <Route path="/" element={<Home />} />
@@ -28,6 +30,7 @@ function App() {
         </Routes>
         <ToastContainer autoClose={2000} />
       </CartProvider>
+      </SkeletonTheme>
     </>
   );
 }
