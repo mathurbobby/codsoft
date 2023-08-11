@@ -3,13 +3,16 @@ import NavHeadBar from "../components/Navbar";
 import Footer from "../components/Footer";
 import CardComp from "../components/CardComp";
 import axios from "axios";
+import SkeletonCard from "../components/SkeletonCard";
+import Skeleton from "react-loading-skeleton";
 
 
 const Home = () => {
   const [products, setProducts] = useState([]);
   const [prodCategory, setProdCategory] = useState([]);
   const [text, setText] = useState("Big Saving Days");
-  const [search, setSearch] = useState("")
+  const [search, setSearch] = useState("");
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -27,17 +30,25 @@ const Home = () => {
 
   const loadData = async () => {
     try {
-      const response = await axios.post("https://clickcart-9q8w.onrender.com/api/fooddata", {});
-    setProducts(response.data[1]);
-    setProdCategory(response.data[0]);
+      const response = await axios.post(
+        "https://clickcart-9q8w.onrender.com/api/fooddata",
+        {}
+      );
+      // console.log(response);
+      setProducts(response.data[1]);
+      setProdCategory(response.data[0]);
+      setIsLoading(false);
     } catch (error) {
-      console.log('in error')
-      console.log(error)
+      console.log("in error");
+      console.log(error);
     }
   };
-
+  
   useEffect(() => {
-    loadData();
+    setTimeout( () => {
+      loadData();
+    },4000)
+    
   }, []);
 
   return (
@@ -46,7 +57,7 @@ const Home = () => {
         <NavHeadBar />
       </div>
       <div>
-      <div
+        <div
           id="carouselExampleFade"
           className="carousel slide carousel-fade mt-5"
           data-bs-ride="carousel"
@@ -55,7 +66,7 @@ const Home = () => {
           <div className="carousel-inner" id="carousel">
             <div className="carousel-caption" style={{ zIndex: "10" }}>
               <div className="mb-5 fs-1">
-                <h2 className="fw-bold"  >{text}</h2>
+                <h2 className="fw-bold">{text}</h2>
               </div>
               <div className="d-flex">
                 <input
@@ -64,11 +75,17 @@ const Home = () => {
                   placeholder="Search for products"
                   aria-label="Search"
                   value={search}
-                  onChange={(e) => {setSearch(e.target.value)}}
+                  onChange={(e) => {
+                    setSearch(e.target.value);
+                  }}
                 />
               </div>
             </div>
-            <div className="carousel-item active" style={{ height: "60vh" }} data-bs-interval="2000">
+            <div
+              className="carousel-item active"
+              style={{ height: "60vh" }}
+              data-bs-interval="2000"
+            >
               <img
                 src="https://img.freepik.com/free-photo/variety-fashionable-garments-hang-clothing-boutique-generated-by-ai_188544-27734.jpg?t=st=1691165461~exp=1691169061~hmac=e6ad648b20fcc2ff502055f829b9a70ad20ce251e19ba6e91cf66ac3c3e5372a&w=826"
                 className="d-block w-100 h-100"
@@ -76,7 +93,11 @@ const Home = () => {
                 alt="..."
               />
             </div>
-            <div className="carousel-item" style={{ height: "60vh" }} data-bs-interval="2000">
+            <div
+              className="carousel-item"
+              style={{ height: "60vh" }}
+              data-bs-interval="2000"
+            >
               <img
                 src="https://img.freepik.com/free-photo/laptop-wooden-table_53876-20635.jpg?w=740&t=st=1691166055~exp=1691166655~hmac=c41a930c583eedb95327323c1559e5893ce8f262dc77d70393c425f64fdc5e1b"
                 className="d-block w-100 h-100"
@@ -84,7 +105,11 @@ const Home = () => {
                 alt="..."
               />
             </div>
-            <div className="carousel-item" style={{ height: "60vh" }} data-bs-interval="2000">
+            <div
+              className="carousel-item"
+              style={{ height: "60vh" }}
+              data-bs-interval="2000"
+            >
               <img
                 src="https://img.freepik.com/free-vector/realistic-phones-different-views_52683-28436.jpg?w=740&t=st=1691166122~exp=1691166722~hmac=4cef2354be056d4aac07142d60001dad1a8c3f12ebd1c8507b172be2e4943d45"
                 className="d-block w-100 h-100"
@@ -120,38 +145,66 @@ const Home = () => {
         </div>
       </div>
       <div className="container">
-        {prodCategory !== []
-          ? prodCategory.map((e, i) => {
-              return (
-                <div key={i} className="row mb-5" >
-                  <div className="fs-3 m-3">{e.CategoryName}</div>
-                  <hr
-                    style={{
-                      background: "black",
-                      color: "black",
-                      borderColor: "black",
-                      height: "1px",
-                    }}
-                  />
-                  {products !== []
-                    ? products
-                        .filter((product) => {
-                          return ( product.CategoryName === e.CategoryName && product.name
-                              .toLowerCase()
-                              .includes(search.toLowerCase()) )
-                        })
-                        .map((data, i) => {
-                          return (
-                            <div key={i} className="col-12 col-md-6 col-lg-4 d-flex justify-content-center mb-3" >
-                              <CardComp productDetails = {data} options = {data.options[0]} />
-                            </div>
-                          );
-                        })
-                    : null}
+        {isLoading ? (
+          
+            <div className="row mb-5">
+                <div className="fs-3 m-3" style={{visibility:'hidden'}} >Home & Furniture</div>
+                <hr
+                  style={{
+                    background: "black",
+                    color: "black",
+                    borderColor: "black",
+                    height: "1px",
+                  }}
+                />
+                <div className="col-12 col-md-6 col-lg-4 mb-3 d-flex justify-content-center">
+                <SkeletonCard />                
                 </div>
-              );
-            })
-          : null}
+                <div className="col-12 col-md-6 col-lg-4 mb-3 d-flex justify-content-center">
+                <SkeletonCard />                
+                </div>
+            </div>         
+        ) : prodCategory !== [] ? (
+          prodCategory.map((e, i) => {
+            return (
+              <div key={i} className="row mb-5">
+                <div className="fs-3 m-3">{e.CategoryName}</div>
+                <hr
+                  style={{
+                    background: "black",
+                    color: "black",
+                    borderColor: "black",
+                    height: "1px",
+                  }}
+                />
+                {products !== []
+                  ? products
+                      .filter((product) => {
+                        return (
+                          product.CategoryName === e.CategoryName &&
+                          product.name
+                            .toLowerCase()
+                            .includes(search.toLowerCase())
+                        );
+                      })
+                      .map((data, i) => {
+                        return (
+                          <div
+                            key={i}
+                            className="col-12 col-md-6 col-lg-4 d-flex justify-content-center mb-3"
+                          >
+                            <CardComp
+                              productDetails={data}
+                              options={data.options[0]}
+                            />
+                          </div>
+                        );
+                      })
+                  : null}
+              </div>
+            );
+          })
+        ) : null}
       </div>
       <div>
         <Footer />
