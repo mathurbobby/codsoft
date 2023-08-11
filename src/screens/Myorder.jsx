@@ -40,15 +40,14 @@ const Myorder = () => {
         className="py-4 mt-3"
         style={{ minHeight: "100vh", backgroundColor: "#F1F3F6" }}
       >
-        {mereOrder !== {} ? (
-          <Container
+        {mereOrder === "" ? ""
+           : <Container
             style={{ color: "#172337" }}
             fluid
             className="mt-5 fs-2 ps-4 "
           >
             Your Previous Orders
-          </Container>
-        ) : null}
+          </Container>}
 
         {mereOrder !== {}
           ? Array(mereOrder).map((data) => {
