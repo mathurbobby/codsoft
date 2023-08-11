@@ -7,7 +7,7 @@ const SkeletonCard = () => {
   return (
     <>
       <Card
-        className="mycard shadow-lg"
+        className="mycard shadow-lg mt-3"
         style={{ width: "18rem", maxHeight: "360px" }}
       >
         <div style={{ width: "100%", height: "150px", objectFit: "fill" }}
